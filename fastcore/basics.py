@@ -168,9 +168,6 @@ def in_(x, a):
 operator.in_ = in_
 
 # Cell
-#nbdev_comment _all_ = ['lt','gt','le','ge','eq','ne','add','sub','mul','truediv','is_','is_not','in_']
-
-# Cell
 for op in ['lt','gt','le','ge','eq','ne','add','sub','mul','truediv','is_','is_not','in_']: _mk_op(op, globals())
 
 # Cell
@@ -622,9 +619,6 @@ class _SelfCls:
     def __call__(self,*args,**kwargs): return self.__getattr__('_call')(*args,**kwargs)
 
 Self = _SelfCls()
-
-# Cell
-#nbdev_comment _all_ = ['Self']
 
 # Cell
 class PrettyString(str):

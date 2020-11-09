@@ -42,9 +42,11 @@ class Param:
 
     def set_default(self, d):
         if self.default is None:
-            if d==inspect.Parameter.empty: self.opt = False
+            if d==inspect.Parameter.empty:
+                #self.opt = False
+                self.default=None
             else: self.default = d
-        if self.default is not None: self.help += f" (default: {self.default})"
+        if self.default is not None: self.help += f""
 
     @property
     def pre(self): return '--' if self.opt else ''
@@ -65,7 +67,7 @@ class CustomFormatter(argparse.ArgumentDefaultsHelpFormatter,
 
 def anno_parser(func, prog=None, from_name=False):
     "Look at params (annotated with `Param`) in func and return an `ArgumentParser`"
-    p = argparse.ArgumentParser(description=func.__doc__, prog=prog, formatter=CustomFormatter)
+    p = argparse.ArgumentParser(description=func.__doc__, prog=prog, formatter_class=CustomFormatter)
     for k,v in inspect.signature(func).parameters.items():
         param = func.__annotations__.get(k, Param())
         param.set_default(v.default)
